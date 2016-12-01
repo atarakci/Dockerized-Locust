@@ -1,0 +1,27 @@
+- hosts: tag_Name_Locust
+  become: true
+  become_method: sudo
+  remote_user: ec2-user
+  tasks:
+      - name: ensure docker installed
+        yum: name=docker state=present update_cache=yes
+      - name: add user to docker group
+        user: name=ec2-user groups=docker append=yes
+      - name: restart docker
+        service: name=docker state=restarted
+      - name: ensure docker is running
+        service: name=docker state=started enabled=yes
+      - name: install docker-compose
+        get_url: url=https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 dest=/usr/bin/docker-compose mode=0755
+      - name: sync container images - locustmaster
+        synchronize: src=/mnt/jenkins/tmp-images/locust.img dest=/tmp/locust.img
+      - name: install new docker images - locust
+        command: docker load -i /tmp/locust.img
+      - name: sync docker compose files
+        synchronize: src=/tmp/locust/ dest=~/locust
+      - name: adjust sysctl params for locust
+        sysctl: name="vm.max_map_count" value="262144" state="present"
+      - name: adjust max files descriptors for locust  
+        sysctl: name=fs.file-max value=2097152 state=present       
+      - name: start locustmaster
+        command: chdir=/home/ec2-user/locust/ docker-compose up -d

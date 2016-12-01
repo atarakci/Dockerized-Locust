@@ -1,0 +1,32 @@
+master:
+  image: hry/locust
+  command: --host=http://www.gokhankaradas.com/ --master
+  hostname: master
+  mem_limit: 1G
+  ports:
+    - 8089:8089
+
+slave1:
+  image: hry/locust
+  command: --host=http://www.gokhankaradas.com/ --slave --master-host=master
+  hostname: slave
+  mem_limit: 9G
+  links:
+    - master
+
+slave2:
+  image: hry/locust
+  command: --host=http://www.gokhankaradas.com/ --slave --master-host=master
+  hostname: slave
+  mem_limit: 9G
+  links:
+    - master
+
+slave3:
+  image: hry/locust
+  command: --host=http://www.gokhankaradas.com/ --slave --master-host=master
+  hostname: slave
+  mem_limit: 9G
+  links:
+    - master
+ 

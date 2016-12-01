@@ -1,0 +1,15 @@
+- hosts: localhost
+  connection: local
+  tasks:
+      - name: create Locust ec2 instance
+        cloudformation:
+          stack_name: "LocustStack"
+          state: "present"
+          region: "eu-west-1"
+          template: "aws/templates/locust-cf.json"
+          template_parameters:
+            KeyName: "camtest"
+            InstanceType: "t2.micro"
+      - name: wait for services to launch
+        command: sleep 60
+
