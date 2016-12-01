@@ -15,11 +15,11 @@ node {
 
     stage 'launch locust ec2 instances'
     sh """
-        /usr/local/bin/ansible-playbook --private-key ~/.ssh/camtest.pem "${home}/ansible/locust-ec2.yaml"
+        /usr/bin/ansible-playbook --private-key ~/.ssh/camtest.pem "${home}/ansible/locust-ec2.yaml"
     """
     stage "install locust"
     sh """
-        /usr/local/bin/ansible-playbook --private-key ~/.ssh/camtest.pem "${home}/ansible/locust-inst.yaml"
+        /usr/bin/ansible-playbook --private-key ~/.ssh/camtest.pem "${home}/ansible/locust-inst.yaml"
     """    
     }
     catch (err) {
