@@ -1,10 +1,8 @@
-- hosts: tag_Name_Locust
+- hosts: tag_Name_Locust*
   become: true
   become_method: sudo
   remote_user: ec2-user
   tasks:
-      - name: setup
-        command: sudo su
       - name: ensure docker installed
         yum: name=docker state=present update_cache=yes
       - name: add user to docker group
