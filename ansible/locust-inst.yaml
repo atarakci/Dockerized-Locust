@@ -20,7 +20,7 @@
       - name: sync docker compose files
         synchronize: src=/tmp/locust/ dest=~/locust
       - name: remove temp images
-        shell: rm /mnt/jenkins/tmp-images/locust.img
+        command: rm /mnt/jenkins/tmp-images/locust.img
       - name: adjust sysctl params for locust
         sysctl: name="vm.max_map_count" value="262144" state="present"
       - name: adjust max files descriptors for locust  
