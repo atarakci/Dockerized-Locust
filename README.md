@@ -6,7 +6,7 @@ First, you need a linux machine, install these applications:
  2. Boto - AWS Command Line Interface
  3. Jenkins
  4. Ansible
- 5. Jenkins
+ 5. Docker
 
 Then, execute these commands:
 
