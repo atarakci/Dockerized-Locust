@@ -11,5 +11,5 @@
             KeyName: "camtest"
             InstanceType: "t2.micro"
       - name: wait for services to launch
-        command: sleep 180
+        command: sleep 60
 
