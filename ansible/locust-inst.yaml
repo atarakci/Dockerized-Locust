@@ -19,11 +19,11 @@
         command: docker load -i /tmp/locust.img
       - name: sync docker compose files
         synchronize: src=/tmp/locust/ dest=~/locust
+      - name: remove temp images
+        shell: rm /mnt/jenkins/tmp-images/locust.img
       - name: adjust sysctl params for locust
         sysctl: name="vm.max_map_count" value="262144" state="present"
       - name: adjust max files descriptors for locust  
-        sysctl: name=fs.file-max value=2097152 state=present
-      - name: enable ip4 forwarding
-        sysctl: name=net.ipv4.ip_forward value=1 state=present       
+        sysctl: name=fs.file-max value=2097152 state=present       
       - name: start locustmaster
         command: chdir=/home/ec2-user/locust/ docker-compose up -d
