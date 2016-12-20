@@ -7,8 +7,6 @@ First, you need a linux machine, install these applications:
  3. Jenkins
  4. Ansible
  5. Docker
- 
-# Run setup.sh
 
 Then, execute these commands:
 
