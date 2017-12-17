@@ -11,7 +11,7 @@ node {
 
     stage("execute playbook ") {
         sh """
-            ansible-playbook "${home}/ansible/locust-ec2.yaml"
+            ansible-playbook --private-key /etc/ansible/webteam.pem "${home}/ansible/locust-ec2.yaml"
         """
     }
 }
