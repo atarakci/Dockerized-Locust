@@ -1,0 +1,17 @@
+#!/usr/bin/env groovy
+
+node {
+    stage 'prepare env'
+    env.WORKSPACE = pwd()
+    def home = "${env.WORKSPACE}"
+
+    stage('checkout') {
+        checkout scm
+    }
+
+    stage("execute playbook ") {
+        sh """
+            ansible-playbook "${home}/ansible/locust-ec2.yaml"
+        """
+    }
+}
