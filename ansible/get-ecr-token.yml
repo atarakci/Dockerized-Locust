@@ -3,7 +3,7 @@
   gather_facts: False
   tasks:
     - name: Get Ecr Token
-      shell: aws ecr get-login --region eu-west-1
+      shell: aws ecr get-login --no-include-email --region eu-west-1
       register: dockerToken
 
     - name: Execute Token
