@@ -17,6 +17,8 @@
         file: path=/home/ec2-user/locust state=directory mode=0755
       - name: sync docker compose files
         copy: src=/mnt/disk2/jenkins/jobs/install-locust/workspace/docker/locust/ dest=/home/ec2-user/locust/
+      - name: build image
+        shell: docker build -t locust /home/ec2-user/locust
       - name: adjust sysctl params for locust
         sysctl: name="vm.max_map_count" value="262144" state="present"
       - name: adjust max files descriptors for locust  

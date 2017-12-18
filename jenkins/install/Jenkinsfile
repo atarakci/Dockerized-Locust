@@ -9,24 +9,6 @@ node {
         checkout scm
     }
 
-        stage('get ecr token and execute') {
-        sh """
-            /usr/local/bin/ansible-playbook ${home}/ansible/get-ecr-token.yml
-        """
-    }
-
-     stage('create and publish docker image'){
-        sh"""
-            docker build -t 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest ${home}/docker/locust
-        """
-     }
-
-    stage('push image') {
-        sh """
-            docker push 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest
-        """
-    }
-
     stage("execute playbook ") {
         sh """
             /usr/local/bin/ansible-playbook --private-key ~/.ssh/delphoi.pem "${home}/ansible/locust-inst.yaml"
