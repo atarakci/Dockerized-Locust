@@ -22,6 +22,8 @@
       - name: adjust max files descriptors for locust  
         sysctl: name=fs.file-max value=2097152 state=present
       - name: enable ip4 forwarding
-        sysctl: name=net.ipv4.ip_forward value=1 state=present       
+        sysctl: name=net.ipv4.ip_forward value=1 state=present
+      - name: fetch image
+        shell: docker pull 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest       
       - name: start locustmaster
         command: chdir=/home/ec2-user/locust/ docker-compose up -d
