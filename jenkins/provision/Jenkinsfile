@@ -11,7 +11,7 @@ node {
 
     stage("execute playbook ") {
         sh """
-            ansible-playbook --private-key ~/.ssh/delphoi.pem "${home}/ansible/locust-ec2.yaml"
+            /usr/local/bin/ansible-playbook --private-key ~/.ssh/delphoi.pem "${home}/ansible/locust-ec2.yaml"
         """
     }
 }
