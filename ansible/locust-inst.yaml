@@ -16,7 +16,7 @@
       - name: create directory
         shell: mkdir /home/ec2-user/locust
       - name: sync docker compose files
-        synchronize: src=/mnt/disk2/jenkins/jobs/install-locust/workspace/docker/locust/* dest=~/locust
+        copy: src=/mnt/disk2/jenkins/jobs/install-locust/workspace/docker/locust/* dest=~/locust
       - name: adjust sysctl params for locust
         sysctl: name="vm.max_map_count" value="262144" state="present"
       - name: adjust max files descriptors for locust  
