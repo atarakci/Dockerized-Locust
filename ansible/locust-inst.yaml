@@ -14,7 +14,7 @@
       - name: install docker-compose
         get_url: url=https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 dest=/usr/bin/docker-compose mode=0755
       - name: create directory
-        shell: mkdir /home/ec2-user/locust
+        file: path=/home/ec2-user/locust state=directory mode=0755
       - name: sync docker compose files
         copy: src=/mnt/disk2/jenkins/jobs/install-locust/workspace/docker/locust/* dest=~/locust
       - name: adjust sysctl params for locust
