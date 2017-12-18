@@ -9,10 +9,14 @@ node {
         checkout scm
     }
 
+        stage('get ecr token and execute') {
+        sh """
+            ansible-playbook ${home}/ansible/get-ecr-token.yml
+        """
+    }
+
      stage('create and publish docker image'){
-        def output = sh(returnStdout: true, script: 'aws ecr get-login --no-include-email --region eu-west-1')
         sh"""
-            ${output}
             docker build -t 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest ${home}/docker/locust
         """
      }

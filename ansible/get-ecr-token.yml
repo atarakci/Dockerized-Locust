@@ -1,0 +1,10 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Get Ecr Token
+      shell: aws ecr get-login --region eu-west-1
+      register: dockerToken
+
+    - name: Execute Token
+      command: "{{ dockerToken.stdout }}"
