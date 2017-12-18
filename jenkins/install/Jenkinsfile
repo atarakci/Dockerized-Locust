@@ -11,7 +11,7 @@ node {
 
         stage('get ecr token and execute') {
         sh """
-            ansible-playbook ${home}/ansible/get-ecr-token.yml
+            /usr/local/bin/ansible-playbook ${home}/ansible/get-ecr-token.yml
         """
     }
 
