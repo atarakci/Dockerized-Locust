@@ -1,5 +1,5 @@
 master:
-  image: hry/locust
+  image: 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest
   command: --host=http://www.gokhankaradas.com/ --master
   hostname: master
   mem_limit: 1G
@@ -7,26 +7,26 @@ master:
     - 8089:8089
 
 slave1:
-  image: hry/locust
+  image: 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest
   command: --host=http://www.gokhankaradas.com/ --slave --master-host=master
   hostname: slave
-  mem_limit: 9G
+  mem_limit: 2G
   links:
     - master
 
 slave2:
-  image: hry/locust
+  image: 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest
   command: --host=http://www.gokhankaradas.com/ --slave --master-host=master
   hostname: slave
-  mem_limit: 9G
+  mem_limit: 2G
   links:
     - master
 
 slave3:
-  image: hry/locust
+  image: 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest
   command: --host=http://www.gokhankaradas.com/ --slave --master-host=master
   hostname: slave
-  mem_limit: 9G
+  mem_limit: 2G
   links:
     - master
  

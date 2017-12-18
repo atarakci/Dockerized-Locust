@@ -1,0 +1,31 @@
+#!/usr/bin/env groovy
+
+node {
+    stage 'prepare env'
+    env.WORKSPACE = pwd()
+    def home = "${env.WORKSPACE}"
+
+    stage('checkout') {
+        checkout scm
+    }
+
+     stage('create and publish docker image'){
+        def output = sh(returnStdout: true, script: 'aws ecr get-login --no-include-email --region eu-west-1')
+        sh"""
+            ${output}
+            docker build -t 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest ${home}/docker/locust
+        """
+     }
+
+    stage('push image') {
+        sh """
+            docker push 785959104253.dkr.ecr.eu-west-1.amazonaws.com/locust:latest
+        """
+    }
+
+    stage("execute playbook ") {
+        sh """
+            /usr/local/bin/ansible-playbook --private-key ~/.ssh/delphoi.pem "${home}/ansible/locust-inst.yaml"
+        """
+    }
+}
